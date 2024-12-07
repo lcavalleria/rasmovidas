@@ -1,7 +1,9 @@
 Server setup:
 - Installs docker
+- Runs jellyfin in docker container  
 
 
 How to run:
-- Add server ip in config.mk  
+- Create config.mk from template
+- 
 - Run `make deploy`

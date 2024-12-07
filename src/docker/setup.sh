@@ -23,6 +23,3 @@ echo "Install docker..."
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin > /dev/null
 echo "Done"
 
-
-echo "Running hello-world container to see if docker is properly installed..."
-sudo docker run hello-world
