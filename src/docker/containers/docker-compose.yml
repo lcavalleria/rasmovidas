@@ -4,10 +4,13 @@ services:
     container_name: jellyfin
     # maybe use in the future?
     # user: changeme_uid:changeme_gid
-    network_mode: 'host'
+    ports:
+      - "8096:8096"  # Map Jellyfin port from container to host
+    networks:
+      - app_network
     volumes:
-      - ${PATH_TO_CONFIG}:/config
-      - ${PATH_TO_CACHE}:/cache
+      - ${PATH_TO_JELLYFIN_CONFIG}:/config
+      # - ${PATH_TO_CACHE}:/cache
       - type: bind
         source: ${PATH_TO_MEDIA}
         target: /media
@@ -27,3 +30,20 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ${PATH_TO_NGINX_CONFIG}:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"    # Map port 80 on the host to port 80 in the container
+    networks:
+      - app_network
+    depends_on:
+      - jellyfin
+    restart: unless-stopped
+
+networks:
+  app_network:
+    driver: bridge

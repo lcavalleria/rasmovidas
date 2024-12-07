@@ -9,8 +9,8 @@ deploy:
 	@ssh $(user)@$(ip) ' \
 		echo "Install docker"; \
 		/tmp/rasmovidas/src/docker/setup.sh; \
-		echo "Start jellyfin container"; \
-		docker compose -f /tmp/rasmovidas/src/jellyfin/docker-compose.yml up -d; \
+		echo "Start containers"; \
+		docker compose -f /tmp/rasmovidas/src/docker/containers/docker-compose.yml up -d; \
 		echo "Cleanup tmp dir"; \
 		rm -rf /tmp/rasmovidas; \
 	'

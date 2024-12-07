@@ -1,2 +1,2 @@
 config.mk
-src/jellyfin/.env
+*.env
