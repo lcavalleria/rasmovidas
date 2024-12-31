@@ -2,6 +2,7 @@ include config.mk
 
 deploy:
 	@echo "Create tmp directory"
+	@ssh $(user)@$(ip) 'rm -rf /tmp/rasmovidas/'
 	@ssh $(user)@$(ip) 'mkdir /tmp/rasmovidas/'
 	@echo "Copy setup to tmp"
 	@scp -r src/ $(user)@$(ip):/tmp/rasmovidas
